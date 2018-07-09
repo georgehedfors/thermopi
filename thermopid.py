@@ -3,27 +3,12 @@
 import re
 import sys
 import time
-import board
-import busio
-import digitalio
 import subprocess
-import adafruit_max31855
 import fourletterphat as flp
 
-temp1 = board.D5  # BBQ
-temp2 = board.D19 # Meat
-
-spi0 = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-spi1 = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-cs0 = digitalio.DigitalInOut(temp1)
-cs1 = digitalio.DigitalInOut(temp2)
-max318551 = adafruit_max31855.MAX31855(spi0, cs0)
-max318552 = adafruit_max31855.MAX31855(spi1, cs1)
+import thermopi
 
 re_ipaddr = re.compile(r"inet\s([0-9.]+)\/", flags=re.M)
-
-def get_temp():
-    return (max318551.temperature, max318552.temperature)
 
 def dprint(s):
     if len(s) > 4:
@@ -43,7 +28,7 @@ if __name__ == "__main__":
     dprint("THERMOPI")
 
     # Check thermometers
-    temps = get_temp()
+    temps = thermopi.get_temp()
     if temps[0] == 0.0 or temps[1] == 0.0:
         dprint("ETER")
         print("Error reading thermometer (%s / %s)" % temps)
@@ -72,14 +57,18 @@ if __name__ == "__main__":
 
     # Thermometer loop
     while True:
-        temps = get_temp()
+        temps = thermopi.get_temp()
 
+        # BBQ temp
         t = str(int(temps[0]))
         pad = 3-len(t)
         dprint("B" + " " * pad + t)
 
         time.sleep(5)
 
+        temps = thermopi.get_temp()
+
+        # Meat temp
         t = str(int(temps[1]))
         pad = 3-len(t)
         dprint("M" + " " * pad + t)
