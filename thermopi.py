@@ -16,4 +16,4 @@ max318551 = adafruit_max31855.MAX31855(spi0, cs0)
 max318552 = adafruit_max31855.MAX31855(spi1, cs1)
 
 def get_temp():
-    return (max318551.temperature, max318552.temperature+1)
+    return (max318551.temperature, max318552.temperature)
