@@ -11,3 +11,5 @@ Raspberry Pi Zero W based BBQ thermometer
 * 1 x $9.95 - Thermocouple Type-K Glass Braid Insulated Stainless Steel Tip
 * .. and various cables for soldering.
 
+# scetch
+(https://github.com/georgehedfors/thermopi/scetch/scetch.png)
