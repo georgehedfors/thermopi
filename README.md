@@ -12,4 +12,4 @@ Raspberry Pi Zero W based BBQ thermometer
 * .. and various cables for soldering.
 
 # scetch
-(https://github.com/georgehedfors/thermopi/scetch/scetch.png)
+![Scetch image](https://github.com/georgehedfors/thermopi/raw/master/scetch/scetch.png "Scetch")
